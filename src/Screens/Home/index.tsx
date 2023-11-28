@@ -21,8 +21,29 @@ const Home: FC<IHomeProps> = ({navigation}) => {
         <Button onPress={() => navigation.navigate('Charts')}>
           <Text style={styles.btnText}>Charts/Graphs</Text>
         </Button>
-        <Button onPress={() => navigation.navigate('DatePickers')}>
-          <Text style={styles.btnText}>Calendars/Date-Pickers</Text>
+        <Button onPress={() => navigation.navigate('CalendarScreen')}>
+          <Text style={styles.btnText}>Calendar Screen</Text>
+        </Button>
+        <Button onPress={() => navigation.navigate('AgendaScreen')}>
+          <Text style={styles.btnText}>Agenda Screen</Text>
+        </Button>
+        <Button onPress={() => navigation.navigate('CalendarListScreen')}>
+          <Text style={styles.btnText}>Calendar List Screen</Text>
+        </Button>
+        <Button onPress={() => navigation.navigate('ExpandableCalendarScreen')}>
+          <Text style={styles.btnText}>Expandable Calendar Screen</Text>
+        </Button>
+        <Button onPress={() => navigation.navigate('NewCalendarListScreen')}>
+          <Text style={styles.btnText}>New Calendar List Screen</Text>
+        </Button>
+        <Button onPress={() => navigation.navigate('PlaygroundScreen')}>
+          <Text style={styles.btnText}>Playground Screen</Text>
+        </Button>
+        <Button onPress={() => navigation.navigate('TimelineCalendarScreen')}>
+          <Text style={styles.btnText}>Timeline Calendar Screen</Text>
+        </Button>
+        <Button onPress={() => navigation.navigate('NewCalendarScreen')}>
+          <Text style={styles.btnText}>New Calendar Screen</Text>
         </Button>
       </View>
     </SafeAreaView>
@@ -39,9 +60,10 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   home: {
-    padding: 24,
+    top: 20,
+    padding: 40,
     width: '100%',
-    gap: 80,
+    gap: 10,
   },
   btnText: {
     fontSize: 18,
