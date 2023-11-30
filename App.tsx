@@ -9,7 +9,6 @@ import React from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import Home from './src/Screens/Home';
-import Charts from './src/Screens/Charts';
 import DatePickers from './src/Screens/DatePickers';
 import CalendarScreen from './src/Screens/Example/src/screens/calendarScreen';
 import AgendaScreen from './src/Screens/Example/src/screens/agendaScreen';
@@ -19,6 +18,8 @@ import NewCalendarListScreen from './src/Screens/Example/src/screens/newCalendar
 import PlaygroundScreen from './src/Screens/Example/src/screens/playgroundScreen';
 import TimelineCalendarScreen from './src/Screens/Example/src/screens/timelineCalendarScreen';
 import NewCalendarScreen from './src/Screens/Example/src/screens/calendarPlaygroundScreen';
+import LineChart from './src/Screens/Charts/LineChart';
+import BarChart from './src/Screens/Charts/BarChart';
 
 const Stack = createNativeStackNavigator();
 
@@ -27,7 +28,8 @@ function App(): JSX.Element {
     <NavigationContainer>
       <Stack.Navigator initialRouteName="Home">
         <Stack.Screen name="Home" component={Home} />
-        <Stack.Screen name="Charts" component={Charts} />
+        <Stack.Screen name="LineChart" component={LineChart} />
+        <Stack.Screen name="BarChart" component={BarChart} />
         <Stack.Screen name="DatePickers" component={DatePickers} />
         <Stack.Screen name="CalendarScreen" component={CalendarScreen} />
         <Stack.Screen name="AgendaScreen" component={AgendaScreen} />
