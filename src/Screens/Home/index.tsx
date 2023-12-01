@@ -34,6 +34,7 @@ const Home: FC<IHomeProps> = ({navigation}) => {
 const buttonData = [
   {route: 'LineChart', text: 'Line Chart'},
   {route: 'BarChart', text: 'Bar Chart'},
+  {route: 'PieChart', text: 'Pie Chart'},
   {route: 'CalendarScreen', text: 'Calendar Screen'},
   {route: 'AgendaScreen', text: 'Agenda Screen'},
   {route: 'CalendarListScreen', text: 'Calendar List Screen'},

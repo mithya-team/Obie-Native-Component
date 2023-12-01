@@ -20,6 +20,7 @@ import TimelineCalendarScreen from './src/Screens/Example/src/screens/timelineCa
 import NewCalendarScreen from './src/Screens/Example/src/screens/calendarPlaygroundScreen';
 import LineChart from './src/Screens/Charts/LineChart';
 import BarChart from './src/Screens/Charts/BarChart';
+import PieChart from './src/Screens/Charts/PieChart';
 
 const Stack = createNativeStackNavigator();
 
@@ -30,6 +31,7 @@ function App(): JSX.Element {
         <Stack.Screen name="Home" component={Home} />
         <Stack.Screen name="LineChart" component={LineChart} />
         <Stack.Screen name="BarChart" component={BarChart} />
+        <Stack.Screen name="PieChart" component={PieChart} />
         <Stack.Screen name="DatePickers" component={DatePickers} />
         <Stack.Screen name="CalendarScreen" component={CalendarScreen} />
         <Stack.Screen name="AgendaScreen" component={AgendaScreen} />
