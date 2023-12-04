@@ -1,11 +1,11 @@
 import {View, StyleSheet} from 'react-native';
 import React, {FC} from 'react';
-import PieChartComponent from '../../../Components/Charts/PieChart';
+import DonutChart from '../../../Components/Charts/DonutChart';
 
 const PieChart: FC = () => {
   return (
     <View style={styles.root}>
-      <PieChartComponent />
+      <DonutChart percentage={35} />
     </View>
   );
 };
