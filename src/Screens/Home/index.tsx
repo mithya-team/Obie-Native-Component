@@ -1,14 +1,14 @@
+import {NativeStackNavigationHelpers} from '@react-navigation/native-stack/lib/typescript/src/types';
+import React, {FC} from 'react';
 import {
+  SafeAreaView,
+  ScrollView,
   StyleSheet,
   Text,
-  View,
-  SafeAreaView,
   useWindowDimensions,
-  ScrollView,
+  View,
 } from 'react-native';
-import React, {FC} from 'react';
 import Button from '../../Components/Button';
-import {NativeStackNavigationHelpers} from '@react-navigation/native-stack/lib/typescript/src/types';
 
 export interface IHomeProps {
   navigation: NativeStackNavigationHelpers;
@@ -16,6 +16,7 @@ export interface IHomeProps {
 
 const Home: FC<IHomeProps> = ({navigation}) => {
   const {height} = useWindowDimensions();
+
   return (
     <SafeAreaView style={{...styles.root, height: height * 0.9}}>
       <ScrollView style={styles.scrollView}>
@@ -60,7 +61,10 @@ const styles = StyleSheet.create({
   home: {
     padding: 30,
     width: '100%',
+    // paddingVertical: 40,
+    // width: '100%',
     gap: 10,
+    margin: 0,
   },
   btnText: {
     fontSize: 18,
