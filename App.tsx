@@ -28,7 +28,7 @@ function App(): JSX.Element {
       <Stack.Navigator initialRouteName="Home">
         <Stack.Screen name="Home" component={Home} />
         <Stack.Screen name="Charts" component={Charts} />
-        <Stack.Screen name="DatePickers" component={DatePickers} />
+        {/* <Stack.Screen name="DatePickers" component={DatePickers} />
         <Stack.Screen name="CalendarScreen" component={CalendarScreen} />
         <Stack.Screen name="AgendaScreen" component={AgendaScreen} />
         <Stack.Screen
@@ -47,7 +47,7 @@ function App(): JSX.Element {
         <Stack.Screen
           name="TimelineCalendarScreen"
           component={TimelineCalendarScreen}
-        />
+        /> */}
         <Stack.Screen name="NewCalendarScreen" component={NewCalendarScreen} />
       </Stack.Navigator>
     </NavigationContainer>

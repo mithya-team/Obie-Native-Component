@@ -9,11 +9,14 @@ import {
   TouchableOpacity,
   Switch,
   Alert,
+  TextStyle,
 } from 'react-native';
 import {Calendar, CalendarUtils} from 'react-native-calendars';
 
 import testIDs from '../testIDs';
 import Marking from '../../../../Components/calendar/day/marking';
+import {LocaleConfig} from 'react-native-calendars';
+import {Theme} from 'react-native-calendars/src/types';
 
 const INITIAL_DATE = '2022-07-06';
 const GREEN = '#13ba7d';
@@ -21,10 +24,12 @@ const PINK = '#a68a9f';
 const RED = '#ba1313';
 
 const NewCalendarScreen = () => {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [selected, setSelected] = useState(INITIAL_DATE);
   const [currentMonth, setCurrentMonth] = useState(INITIAL_DATE);
-  const [markingType, setMarkingType] = useState(Marking.markings.DOT);
+  const [markingType, setMarkingType] = useState(Marking.markings.PERIOD);
   const [selectedButtonIndex, setSelectedButtonIndex] = useState(0);
+  const abbreviatedDayNames = ['S', 'M', 'T', 'W', 'T', 'F', 'S'];
 
   /** props */
   const [firstDay, setFirstDay] = useState(0);
@@ -37,7 +42,7 @@ const NewCalendarScreen = () => {
   const [showSixWeeks, setShowSixWeeks] = useState(false);
   const [hideExtraDays, setHideExtraDays] = useState(false);
   const [hideDayNames, setHideDayNames] = useState(false);
-  const [hideArrows, setHideArrows] = useState(false);
+  const [hideArrows, setHideArrows] = useState(true);
   const [disabledByDefault, setDisabledByDefault] = useState(false);
   const [
     disableAllTouchEventsForDisabledDays,
@@ -160,105 +165,239 @@ const NewCalendarScreen = () => {
     Alert.alert(`Date: ${day.dateString}`);
   }, []);
 
-  const theme = useMemo(() => {
-    return {
+  LocaleConfig.locales[LocaleConfig.defaultLocale].dayNamesShort = [
+    'S',
+    'M',
+    'T',
+    'W',
+    'T',
+    'F',
+    'S',
+  ];
+
+  const theme: Theme = useMemo(() => {
+    const themeData: Theme = {
       arrowColor: 'grey',
       textInactiveColor: PINK,
       textSectionTitleDisabledColor: '#a5e8cf',
-      textSectionTitleColor: GREEN,
+      textSectionTitleColor: 'rgba(11, 53, 91, 0.40)',
+      backgroundColor: '#ffffff',
+      calendarBackground: '#ffffff',
+      dayTextColor: '#2d4150',
+      weekVerticalMargin: 2,
+      contentStyle: {
+        // borderRadius: 45,
+        // borderWidth: 2, // Add borderWidth
+        borderColor: 'red', // Add borderColor
+        // borderCurve: 'circular',
+        // backgroundColor: 'black',
+      },
+      stylesheet: {
+        day: {
+          period: {
+            wrapper: {
+              alignItems: 'center',
+              alignSelf: 'stretch',
+              marginLeft: -2,
+              borderRadius: 2,
+              overflow: 'hidden',
+            },
+            leftFiller: {
+              height: 26,
+              flex: 1,
+              marginLeft: 50,
+            },
+          },
+        },
+      },
     };
+    return themeData;
   }, []);
 
-  const dotMarks = useMemo(() => {
-    return {
-      [getDate(1)]: {
-        disabled: true,
-        dotColor: RED,
-        marked: true,
-      },
-      [getDate(2)]: {
-        dotColor: RED,
-        marked: true,
-      },
-      [selected]: {
-        selected: true,
-        disableTouchEvent: true,
-        selectedColor: PINK,
-        selectedTextColor: RED,
-      },
-    };
-  }, [selected]);
-
-  const multiDotMarks = useMemo(() => {
-    return {
-      [INITIAL_DATE]: {
-        selected: true,
-        dots: [
-          {key: 'vacation', color: 'blue', selectedDotColor: RED},
-          {key: 'massage', color: RED, selectedDotColor: 'white'},
-        ],
-      },
-      [getDate(1)]: {
-        disabled: true,
-        dots: [
-          {key: 'vacation', color: GREEN, selectedDotColor: RED},
-          {key: 'massage', color: RED, selectedDotColor: GREEN},
-        ],
-      },
-    };
-  }, []);
-
-  // const periodMarks = useMemo(() => {
+  // const dotMarks = useMemo(() => {
   //   return {
-  //     '2012-05-17': {disabled: true},
-  //     '2012-05-08': {textColor: 'pink'},
-  //     '2012-05-09': {textColor: 'pink'},
-  //     '2012-05-14': {startingDay: true, color: GREEN, endingDay: true},
-  //     '2012-05-21': {startingDay: true, color: GREEN},
-  //     '2012-05-22': {endingDay: true, color: 'gray'},
-  //     '2012-05-24': {startingDay: true, color: 'gray'},
-  //     '2012-05-25': {color: 'gray'},
-  //     '2012-05-26': {endingDay: true, color: 'gray'}
+  //     [getDate(1)]: {
+  //       disabled: true,
+  //       dotColor: RED,
+  //       marked: true,
+  //     },
+  //     [getDate(2)]: {
+  //       dotColor: RED,
+  //       marked: true,
+  //     },
+  //     [selected]: {
+  //       selected: true,
+  //       disableTouchEvent: true,
+  //       selectedColor: PINK,
+  //       selectedTextColor: RED,
+  //     },
+  //   };
+  // }, [selected]);
+
+  // const multiDotMarks = useMemo(() => {
+  //   return {
+  //     [INITIAL_DATE]: {
+  //       selected: true,
+  //       dots: [
+  //         {key: 'vacation', color: 'blue', selectedDotColor: RED},
+  //         {key: 'massage', color: RED, selectedDotColor: 'white'},
+  //       ],
+  //     },
+  //     [getDate(1)]: {
+  //       disabled: true,
+  //       dots: [
+  //         {key: 'vacation', color: GREEN, selectedDotColor: RED},
+  //         {key: 'massage', color: RED, selectedDotColor: GREEN},
+  //       ],
+  //     },
   //   };
   // }, []);
 
   const periodWithDotsMarks = useMemo(() => {
     return {
       [getDate(-3)]: {
-        marked: true,
-        dotColor: 'white',
-        startingDay: true,
-        endingDay: true,
-        color: '#50cebb',
-        textColor: 'white',
-      },
-      [INITIAL_DATE]: {marked: true, dotColor: '#50cebb'},
-      [getDate(1)]: {disabled: true, marked: true, dotColor: '#50cebb'},
-      [getDate(2)]: {startingDay: true, color: '#50cebb', textColor: 'white'},
-      [getDate(3)]: {
-        color: '#70d7c7',
+        // color: '#E5C3D2',
         customTextStyle: {
-          color: '#FFFAAA',
-          fontWeight: '700',
+          margin: 'auto',
+          fontSize: 14,
+          color: 'white', // Text color
+          backgroundColor: '#0B355B', // Background color for text
+          padding: 4, // Padding for text background
+          borderRadius: 100,
+          height: 25,
+          width: 25,
+        },
+        customContainerStyle: {
+          borderColor: '#0B355B',
+          borderWidth: 2,
+          // padding: 2, // Padding for the border
+          // margin: 2, // Margin for spacing
+          // backgroundColor: '#E5C3D2', // White background for spacing
+          height: 37,
+          width: 37,
+          borderRadius: 100,
+        },
+      },
+      [getDate(19)]: {
+        // color: '',
+        customContainerStyle: {
+          // borderColor: '#0B355B',
+          // borderWidth: 2,
+          // padding: 2, // Padding for the border
+          // margin: 2, // Margin for spacing
+          backgroundColor: '#2C658F', // White background for spacing
+          height: 37,
+          width: 37,
+          borderRadius: 100,
+        },
+        customTextStyle: {
+          color: 'white',
+        },
+      },
+      [INITIAL_DATE]: {marked: true, dotColor: '#FFCF98'},
+      [getDate(1)]: {disabled: true, marked: true, dotColor: '#FFCF98'},
+      [getDate(2)]: {startingDay: true, color: '#FFCF98', textColor: 'black'},
+      [getDate(3)]: {
+        color: '#FFCF98',
+        customTextStyle: {
+          margin: 'auto',
+          fontSize: 14,
+          color: 'white', // Text color
+          backgroundColor: '#0B355B', // Background color for text
+          padding: 4, // Padding for text background
+          borderRadius: 100,
+          height: 25,
+          width: 25,
+        },
+        customContainerStyle: {
+          borderColor: '#0B355B',
+          borderWidth: 2,
+          // padding: 2, // Padding for the border
+          // margin: 2, // Margin for spacing
+          backgroundColor: '#FFCF98', // White background for spacing
+          height: 37,
+          width: 37,
+          borderRadius: 100,
         },
       },
       [getDate(4)]: {
-        color: '#70d7c7',
-        textColor: 'white',
+        color: '#FFCF98',
+        textColor: 'black',
         marked: true,
         dotColor: 'white',
       },
-      [getDate(5)]: {color: '#70d7c7', inactive: true},
+      [getDate(5)]: {color: '#FFCF98', inactive: true},
       [getDate(6)]: {
         endingDay: true,
-        color: '#50cebb',
-        textColor: 'white',
+        color: '#F6A13E',
+        textColor: 'black',
+        borderRadius: 100,
         customContainerStyle: {
-          borderTopRightRadius: 5,
-          borderBottomRightRadius: 5,
+          borderRadius: 100,
         },
       },
       [getDate(10)]: {inactive: true, disableTouchEvent: true},
+      [getDate(12)]: {
+        startingDay: true,
+        color: '#E5C3D2',
+        textColor: 'black',
+      },
+      [getDate(13)]: {
+        color: '#E5C3D2',
+        customTextStyle: {
+          margin: 'auto',
+          fontSize: 14,
+          color: 'white', // Text color
+          backgroundColor: '#0B355B', // Background color for text
+          padding: 4, // Padding for text background
+          borderRadius: 100,
+          height: 25,
+          width: 25,
+        },
+        customContainerStyle: {
+          borderColor: '#0B355B',
+          borderWidth: 2,
+          // padding: 2, // Padding for the border
+          // margin: 2, // Margin for spacing
+          backgroundColor: '#E5C3D2', // White background for spacing
+          height: 37,
+          width: 37,
+          borderRadius: 100,
+        },
+      },
+      [getDate(14)]: {
+        color: '#E5C3D2',
+        textColor: 'black',
+        marked: true,
+        dotColor: 'white',
+      },
+      [getDate(15)]: {color: '#E5C3D2', inactive: true},
+      [getDate(16)]: {
+        endingDay: true,
+        color: '#DD98B6',
+        textColor: 'black',
+        borderRadius: 100,
+        customContainerStyle: {
+          borderRadius: 100,
+        },
+      },
+      [getDate(21)]: {
+        startingDay: true,
+        color: '#3375A5',
+        textColor: 'white',
+      },
+      [getDate(22)]: {
+        color: '#FFFFFF',
+      },
+      [getDate(23)]: {
+        endingDay: true,
+        color: '#89A9C1',
+        textColor: 'white',
+        borderRadius: 100,
+        customContainerStyle: {
+          borderRadius: 100,
+        },
+      },
     };
   }, []);
 
@@ -318,7 +457,7 @@ const NewCalendarScreen = () => {
       [getDate(3)]: {
         customStyles: {
           container: {
-            backgroundColor: GREEN,
+            backgroundColor: '#2C658F',
           },
           text: {
             color: 'white',
@@ -350,15 +489,24 @@ const NewCalendarScreen = () => {
       [getDate(10)]: {
         customStyles: {
           container: {
-            backgroundColor: 'pink',
-            elevation: 4,
-            borderColor: 'purple',
-            borderWidth: 5,
+            borderColor: '#0B355B',
+            borderWidth: 2,
+            // padding: 2, // Padding for the border
+            // margin: 2, // Margin for spacing
+            backgroundColor: 'white', // White background for spacing
+            height: 37,
+            width: 37,
+            borderRadius: 100,
           },
           text: {
-            marginTop: 3,
-            fontSize: 11,
-            color: 'black',
+            margin: 'auto',
+            fontSize: 14,
+            color: 'white', // Text color
+            backgroundColor: '#0B355B', // Background color for text
+            padding: 4, // Padding for text background
+            borderRadius: 100,
+            height: 25,
+            width: 25,
           },
         },
       },
@@ -386,25 +534,41 @@ const NewCalendarScreen = () => {
 
   const markingForType = useCallback(() => {
     switch (markingType) {
-      case Marking.markings.DOT:
-        return dotMarks;
-      case Marking.markings.MULTI_DOT:
-        return multiDotMarks;
+      // case Marking.markings.DOT:
+      //   return dotMarks;
+      // case Marking.markings.MULTI_DOT:
+      //   return multiDotMarks;
       case Marking.markings.PERIOD:
         return periodWithDotsMarks; //periodMarks;
-      case Marking.markings.MULTI_PERIOD:
-        return multiPeriodMarks;
-      case Marking.markings.CUSTOM:
-        return customMarks;
+      // case Marking.markings.MULTI_PERIOD:
+      //   return multiPeriodMarks;
+      // case Marking.markings.CUSTOM:
+      //   return customMarks;
     }
-  }, [
-    customMarks,
-    dotMarks,
-    markingType,
-    multiDotMarks,
-    multiPeriodMarks,
-    periodWithDotsMarks,
-  ]);
+  }, [markingType, periodWithDotsMarks]);
+
+  function renderCustomHeader(date: any) {
+    const header = date.toString('MMMM yyyy');
+    const [month, year] = header.split(' ');
+    const textStyle: TextStyle = {
+      paddingTop: 10,
+      paddingBottom: 10,
+      paddingRight: 5,
+      color: '#0B355B',
+      fontFamily: 'TT Norms Pro',
+      fontSize: 20,
+      fontStyle: 'normal',
+      fontWeight: '500',
+      lineHeight: 24,
+    };
+
+    return (
+      <View style={styles.header}>
+        <Text style={[styles.month, textStyle]}>{`${month}`}</Text>
+        <Text style={[styles.year, textStyle]}>{year}</Text>
+      </View>
+    );
+  }
 
   const renderCalendar = () => {
     return (
@@ -448,6 +612,8 @@ const NewCalendarScreen = () => {
         renderArrow={renderArrow ? _renderArrow : undefined}
         disableArrowLeft={disableArrowLeft}
         disableArrowRight={disableArrowRight}
+        dayNames={abbreviatedDayNames}
+        renderHeader={renderCustomHeader}
       />
     );
   };
@@ -695,10 +861,10 @@ const NewCalendarScreen = () => {
     return (
       <View style={styles.container}>
         <View style={styles.buttonsContainer}>
-          <Text style={[styles.radioButtonsTitle, styles.text]}>
+          {/* <Text style={[styles.radioButtonsTitle, styles.text]}>
             Marking Type
-          </Text>
-          {renderRadioButtons()}
+          </Text> */}
+          {/* {renderRadioButtons()} */}
           {renderButton()}
         </View>
         {renderSwitches()}
@@ -722,13 +888,16 @@ export default NewCalendarScreen;
 
 const styles = StyleSheet.create({
   calendar: {
-    marginBottom: 10,
+    borderRadius: 16,
+    marginBottom: 50,
     borderBottomWidth: 1,
-    borderBottomColor: 'lightgrey',
+    // borderBottomColor: 'green',
+    // backgroundColor: '#0B355B',
   },
   container: {
     marginHorizontal: 5,
-    marginVertical: 10,
+    marginVertical: 20,
+    // zIndex:100
   },
   row: {
     flexDirection: 'row',
@@ -813,5 +982,19 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: 'bold',
     color: GREEN,
+  },
+  header: {
+    flexDirection: 'row',
+    width: '100%',
+    // justifyContent: 'space-between',
+    marginTop: 10,
+    marginBottom: 10,
+    gap: 2,
+  },
+  month: {
+    marginLeft: 5,
+  },
+  year: {
+    marginRight: 5,
   },
 });

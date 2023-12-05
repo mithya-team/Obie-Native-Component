@@ -4,14 +4,16 @@ const {toMarkingFormat} = require('./interface');
 const latinNumbersPattern = /[0-9]/g;
 
 function isValidXDate(date: any) {
-  return date && (date instanceof XDate);
+  return date && date instanceof XDate;
 }
 
 export function sameMonth(a?: XDate, b?: XDate) {
   if (!isValidXDate(a) || !isValidXDate(b)) {
     return false;
   } else {
-    return a?.getFullYear() === b?.getFullYear() && a?.getMonth() === b?.getMonth();
+    return (
+      a?.getFullYear() === b?.getFullYear() && a?.getMonth() === b?.getMonth()
+    );
   }
 }
 
@@ -19,7 +21,11 @@ export function sameDate(a?: XDate, b?: XDate) {
   if (!isValidXDate(a) || !isValidXDate(b)) {
     return false;
   } else {
-    return a?.getFullYear() === b?.getFullYear() && a?.getMonth() === b?.getMonth() && a?.getDate() === b?.getDate();
+    return (
+      a?.getFullYear() === b?.getFullYear() &&
+      a?.getMonth() === b?.getMonth() &&
+      a?.getDate() === b?.getDate()
+    );
   }
 }
 
@@ -33,7 +39,7 @@ export function onSameDateRange({
   secondDay: string;
   numberOfDays: number;
   firstDateInRange: string;
-}){
+}) {
   const aDate = new XDate(firstDay);
   const bDate = new XDate(secondDay);
   const firstDayDate = new XDate(firstDateInRange);
@@ -87,7 +93,11 @@ export function isLTE(a: XDate, b: XDate) {
 
 export function formatNumbers(date: any) {
   const numbers = getLocale().numbers;
-  return numbers ? date.toString().replace(latinNumbersPattern, (char: any) => numbers[+char]) : date;
+  return numbers
+    ? date
+        .toString()
+        .replace(latinNumbersPattern, (char: any) => numbers[+char])
+    : date;
 }
 
 function fromTo(a: XDate, b: XDate): XDate[] {
@@ -101,7 +111,8 @@ function fromTo(a: XDate, b: XDate): XDate[] {
   return days;
 }
 
-export function month(date: XDate) { // exported for tests only
+export function month(date: XDate) {
+  // exported for tests only
   const year = date.getFullYear(),
     month = date.getMonth();
   const days = new XDate(year, month + 1, 0).getDate();
@@ -116,7 +127,9 @@ export function weekDayNames(firstDayOfWeek = 0) {
   let weekDaysNames = getLocale().dayNamesShort;
   const dayShift = firstDayOfWeek % 7;
   if (dayShift) {
-    weekDaysNames = weekDaysNames.slice(dayShift).concat(weekDaysNames.slice(0, dayShift));
+    weekDaysNames = weekDaysNames
+      .slice(dayShift)
+      .concat(weekDaysNames.slice(0, dayShift));
   }
   return weekDaysNames;
 }
@@ -161,8 +174,15 @@ export function page(date: XDate, firstDayOfWeek = 0, showSixWeeks = false) {
   return before.concat(days.slice(1, days.length - 1), after);
 }
 
-export function isDateNotInRange(date: XDate, minDate: string, maxDate: string) {
-  return (minDate && !isGTE(date, new XDate(minDate))) || (maxDate && !isLTE(date, new XDate(maxDate)));
+export function isDateNotInRange(
+  date: XDate,
+  minDate: string,
+  maxDate: string,
+) {
+  return (
+    (minDate && !isGTE(date, new XDate(minDate))) ||
+    (maxDate && !isLTE(date, new XDate(maxDate)))
+  );
 }
 
 export function getWeekDates(date: string, firstDay = 0, format?: string) {
@@ -210,7 +230,8 @@ export function getPartialWeekDates(date?: string, numberOfDays = 7) {
 }
 
 export function generateDay(originDate: string | XDate, daysOffset = 0) {
-  const baseDate = originDate instanceof XDate ? originDate : new XDate(originDate);
+  const baseDate =
+    originDate instanceof XDate ? originDate : new XDate(originDate);
   return toMarkingFormat(baseDate.clone().addDays(daysOffset));
 }
 

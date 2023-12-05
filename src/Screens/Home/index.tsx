@@ -21,7 +21,7 @@ const Home: FC<IHomeProps> = ({navigation}) => {
         <Button onPress={() => navigation.navigate('Charts')}>
           <Text style={styles.btnText}>Charts/Graphs</Text>
         </Button>
-        <Button onPress={() => navigation.navigate('CalendarScreen')}>
+        {/* <Button onPress={() => navigation.navigate('CalendarScreen')}>
           <Text style={styles.btnText}>Calendar Screen</Text>
         </Button>
         <Button onPress={() => navigation.navigate('AgendaScreen')}>
@@ -41,7 +41,7 @@ const Home: FC<IHomeProps> = ({navigation}) => {
         </Button>
         <Button onPress={() => navigation.navigate('TimelineCalendarScreen')}>
           <Text style={styles.btnText}>Timeline Calendar Screen</Text>
-        </Button>
+        </Button> */}
         <Button onPress={() => navigation.navigate('NewCalendarScreen')}>
           <Text style={styles.btnText}>New Calendar Screen</Text>
         </Button>
