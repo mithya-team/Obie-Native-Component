@@ -21,14 +21,15 @@ import {Theme} from 'react-native-calendars/src/types';
 const INITIAL_DATE = '2022-07-06';
 const GREEN = '#13ba7d';
 const PINK = '#a68a9f';
-const RED = '#ba1313';
+// const RED = '#ba1313';
 
 const NewCalendarScreen = () => {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [selected, setSelected] = useState(INITIAL_DATE);
   const [currentMonth, setCurrentMonth] = useState(INITIAL_DATE);
-  const [markingType, setMarkingType] = useState(Marking.markings.PERIOD);
-  const [selectedButtonIndex, setSelectedButtonIndex] = useState(0);
+  // const [markingType, setMarkingType] = useState(Marking.markings.PERIOD);
+  const markingType = Marking.markings.PERIOD;
+  // const [selectedButtonIndex, setSelectedButtonIndex] = useState(0);
   const abbreviatedDayNames = ['S', 'M', 'T', 'W', 'T', 'F', 'S'];
 
   /** props */
@@ -36,7 +37,7 @@ const NewCalendarScreen = () => {
   const [minAndMax, setMinAndMax] = useState(false);
   const [allowSelectionOutOfRange, setAllowSelectionOutOfRange] =
     useState(false);
-  const [enableSwipeMonths, setEnableSwipeMonths] = useState(false);
+  const [enableSwipeMonths, setEnableSwipeMonths] = useState(true);
   const [disableMonthChange, setDisableMonthChange] = useState(false);
   const [showWeekNumbers, setShowWeekNumbers] = useState(false);
   const [showSixWeeks, setShowSixWeeks] = useState(false);
@@ -401,125 +402,125 @@ const NewCalendarScreen = () => {
     };
   }, []);
 
-  const multiPeriodMarks = useMemo(() => {
-    return {
-      [INITIAL_DATE]: {
-        periods: [
-          {startingDay: true, endingDay: false, color: GREEN},
-          {startingDay: true, endingDay: false, color: 'orange'},
-        ],
-      },
-      [getDate(1)]: {
-        periods: [
-          {startingDay: false, endingDay: true, color: GREEN},
-          {startingDay: false, endingDay: true, color: 'orange'},
-          {startingDay: true, endingDay: false, color: 'pink'},
-        ],
-      },
-      [getDate(5)]: {
-        periods: [
-          {startingDay: true, endingDay: true, color: 'orange'},
-          {color: 'transparent'},
-          {startingDay: false, endingDay: false, color: 'pink'},
-        ],
-      },
-    };
-  }, []);
+  // const multiPeriodMarks = useMemo(() => {
+  //   return {
+  //     [INITIAL_DATE]: {
+  //       periods: [
+  //         {startingDay: true, endingDay: false, color: GREEN},
+  //         {startingDay: true, endingDay: false, color: 'orange'},
+  //       ],
+  //     },
+  //     [getDate(1)]: {
+  //       periods: [
+  //         {startingDay: false, endingDay: true, color: GREEN},
+  //         {startingDay: false, endingDay: true, color: 'orange'},
+  //         {startingDay: true, endingDay: false, color: 'pink'},
+  //       ],
+  //     },
+  //     [getDate(5)]: {
+  //       periods: [
+  //         {startingDay: true, endingDay: true, color: 'orange'},
+  //         {color: 'transparent'},
+  //         {startingDay: false, endingDay: false, color: 'pink'},
+  //       ],
+  //     },
+  //   };
+  // }, []);
 
-  const customMarks = useMemo(() => {
-    return {
-      [INITIAL_DATE]: {
-        customStyles: {
-          container: {
-            backgroundColor: 'white',
-            elevation: 2,
-          },
-          text: {
-            color: RED,
-            marginTop: 0,
-          },
-        },
-      },
-      [getDate(1)]: {
-        selected: true,
-      },
-      [getDate(2)]: {
-        customStyles: {
-          container: {
-            backgroundColor: RED,
-            elevation: 4,
-          },
-          text: {
-            color: 'white',
-          },
-        },
-      },
-      [getDate(3)]: {
-        customStyles: {
-          container: {
-            backgroundColor: '#2C658F',
-          },
-          text: {
-            color: 'white',
-          },
-        },
-      },
-      [getDate(4)]: {
-        customStyles: {
-          container: {
-            backgroundColor: 'black',
-            elevation: 2,
-          },
-          text: {
-            color: 'yellow',
-          },
-        },
-      },
-      [getDate(5)]: {
-        disabled: true,
-      },
-      [getDate(6)]: {
-        customStyles: {
-          text: {
-            color: 'black',
-            fontWeight: 'bold',
-          },
-        },
-      },
-      [getDate(10)]: {
-        customStyles: {
-          container: {
-            borderColor: '#0B355B',
-            borderWidth: 2,
-            // padding: 2, // Padding for the border
-            // margin: 2, // Margin for spacing
-            backgroundColor: 'white', // White background for spacing
-            height: 37,
-            width: 37,
-            borderRadius: 100,
-          },
-          text: {
-            margin: 'auto',
-            fontSize: 14,
-            color: 'white', // Text color
-            backgroundColor: '#0B355B', // Background color for text
-            padding: 4, // Padding for text background
-            borderRadius: 100,
-            height: 25,
-            width: 25,
-          },
-        },
-      },
-      [getDate(11)]: {
-        customStyles: {
-          container: {
-            backgroundColor: 'orange',
-            borderRadius: 0,
-          },
-        },
-      },
-    };
-  }, []);
+  // const customMarks = useMemo(() => {
+  //   return {
+  //     [INITIAL_DATE]: {
+  //       customStyles: {
+  //         container: {
+  //           backgroundColor: 'white',
+  //           elevation: 2,
+  //         },
+  //         text: {
+  //           color: RED,
+  //           marginTop: 0,
+  //         },
+  //       },
+  //     },
+  //     [getDate(1)]: {
+  //       selected: true,
+  //     },
+  //     [getDate(2)]: {
+  //       customStyles: {
+  //         container: {
+  //           backgroundColor: RED,
+  //           elevation: 4,
+  //         },
+  //         text: {
+  //           color: 'white',
+  //         },
+  //       },
+  //     },
+  //     [getDate(3)]: {
+  //       customStyles: {
+  //         container: {
+  //           backgroundColor: '#2C658F',
+  //         },
+  //         text: {
+  //           color: 'white',
+  //         },
+  //       },
+  //     },
+  //     [getDate(4)]: {
+  //       customStyles: {
+  //         container: {
+  //           backgroundColor: 'black',
+  //           elevation: 2,
+  //         },
+  //         text: {
+  //           color: 'yellow',
+  //         },
+  //       },
+  //     },
+  //     [getDate(5)]: {
+  //       disabled: true,
+  //     },
+  //     [getDate(6)]: {
+  //       customStyles: {
+  //         text: {
+  //           color: 'black',
+  //           fontWeight: 'bold',
+  //         },
+  //       },
+  //     },
+  //     [getDate(10)]: {
+  //       customStyles: {
+  //         container: {
+  //           borderColor: '#0B355B',
+  //           borderWidth: 2,
+  //           // padding: 2, // Padding for the border
+  //           // margin: 2, // Margin for spacing
+  //           backgroundColor: 'white', // White background for spacing
+  //           height: 37,
+  //           width: 37,
+  //           borderRadius: 100,
+  //         },
+  //         text: {
+  //           margin: 'auto',
+  //           fontSize: 14,
+  //           color: 'white', // Text color
+  //           backgroundColor: '#0B355B', // Background color for text
+  //           padding: 4, // Padding for text background
+  //           borderRadius: 100,
+  //           height: 25,
+  //           width: 25,
+  //         },
+  //       },
+  //     },
+  //     [getDate(11)]: {
+  //       customStyles: {
+  //         container: {
+  //           backgroundColor: 'orange',
+  //           borderRadius: 0,
+  //         },
+  //       },
+  //     },
+  //   };
+  // }, []);
 
   const inactiveMarks = useMemo(() => {
     return {
@@ -813,38 +814,38 @@ const NewCalendarScreen = () => {
     );
   };
 
-  /** Buttons */
-  const getValue = (index = 0) => {
-    return Object.values(Marking.markings)[index];
-  };
+  // /** Buttons */
+  // const getValue = (index = 0) => {
+  //   return Object.values(Marking.markings)[index];
+  // };
 
-  const setType = (index = 0) => {
-    setSelectedButtonIndex(index);
-    setMarkingType(getValue(index));
-  };
+  // const setType = (index = 0) => {
+  //   setSelectedButtonIndex(index);
+  //   setMarkingType(getValue(index));
+  // };
 
-  const renderRadioButton = (index = 0) => {
-    const value = getValue(index);
-    return (
-      <TouchableOpacity
-        onPress={() => setType(index)}
-        key={index}
-        style={styles.radioButtonContainer}>
-        <View style={styles.radioButton}>
-          {selectedButtonIndex === index && (
-            <View style={styles.selectedRadioButton} />
-          )}
-        </View>
-        <Text>{value}</Text>
-      </TouchableOpacity>
-    );
-  };
+  // const renderRadioButton = (index = 0) => {
+  //   const value = getValue(index);
+  //   return (
+  //     <TouchableOpacity
+  //       onPress={() => setType(index)}
+  //       key={index}
+  //       style={styles.radioButtonContainer}>
+  //       <View style={styles.radioButton}>
+  //         {selectedButtonIndex === index && (
+  //           <View style={styles.selectedRadioButton} />
+  //         )}
+  //       </View>
+  //       <Text>{value}</Text>
+  //     </TouchableOpacity>
+  //   );
+  // };
 
-  const renderRadioButtons = () => {
-    return times(5, i => {
-      return renderRadioButton(i);
-    });
-  };
+  // const renderRadioButtons = () => {
+  //   return times(5, i => {
+  //     return renderRadioButton(i);
+  //   });
+  // };
 
   const renderButton = () => {
     return (

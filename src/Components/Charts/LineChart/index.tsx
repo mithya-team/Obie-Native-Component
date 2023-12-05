@@ -1,22 +1,25 @@
 import {StyleSheet, Text, View} from 'react-native';
 import React, {FC} from 'react';
-import {LineChart, yAxisSides} from 'react-native-gifted-charts';
+import {
+  LineChart as RNGCLineChart,
+  yAxisSides,
+} from 'react-native-gifted-charts';
 import {
   LineChartPropsType,
   itemType,
 } from 'react-native-gifted-charts/src/LineChart/types';
 
-export interface IBBTData {
+export interface ILineChartData {
   day: string;
   date: number;
   temperature: number;
 }
 
-export interface IBBTChart extends Omit<LineChartPropsType, 'data'> {
-  data: Array<Omit<itemType, 'value'> & IBBTData & {value?: number}>;
+export interface ILineChart extends Omit<LineChartPropsType, 'data'> {
+  data: Array<Omit<itemType, 'value'> & ILineChartData & {value?: number}>;
 }
 
-const BBTChart: FC<IBBTChart> = ({
+const LineChart: FC<ILineChart> = ({
   yAxisSide = yAxisSides.RIGHT,
   ...chartProps
 }) => {
@@ -31,7 +34,7 @@ const BBTChart: FC<IBBTChart> = ({
     }),
   );
   return (
-    <LineChart
+    <RNGCLineChart
       {...chartProps}
       color="#14214e"
       customDataPoint={CustomDataPoint}
@@ -40,7 +43,7 @@ const BBTChart: FC<IBBTChart> = ({
       maxValue={4}
       noOfSections={8}
       roundToDigits={2}
-      rulesColor="#e9f5f6"
+      rulesColor="#e4f2f3"
       showFractionalValues
       spacing={45}
       stepHeight={50}
@@ -50,9 +53,9 @@ const BBTChart: FC<IBBTChart> = ({
       showTextOnFocus
       //   stripHeight={height}
       stripWidth={65}
-      stripColor="#eaf9f2"
+      // stripColor="#eaf9f2"
       stripOpacity={0.5}
-      xAxisColor="#e9f5f6"
+      xAxisColor="#e4f2f3"
       yAxisLabelWidth={45}
       width={300}
       yAxisOffset={96}
@@ -83,7 +86,7 @@ const CustomXAxisLabel = (day: string, date: number) => (
   </View>
 );
 
-export default BBTChart;
+export default LineChart;
 
 const styles = StyleSheet.create({
   customDataPoint: {

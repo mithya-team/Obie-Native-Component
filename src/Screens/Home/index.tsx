@@ -1,54 +1,50 @@
+import {NativeStackNavigationHelpers} from '@react-navigation/native-stack/lib/typescript/src/types';
+import React, {FC} from 'react';
 import {
+  SafeAreaView,
+  ScrollView,
   StyleSheet,
   Text,
-  View,
-  SafeAreaView,
   useWindowDimensions,
+  View,
 } from 'react-native';
-import React, {FC} from 'react';
 import Button from '../../Components/Button';
 
 export interface IHomeProps {
-  // TODO - add navigation type
-  navigation: any;
+  navigation: NativeStackNavigationHelpers;
 }
 
 const Home: FC<IHomeProps> = ({navigation}) => {
   const {height} = useWindowDimensions();
+
   return (
-    <SafeAreaView style={{...styles.root, height: 0.75 * height}}>
-      <View style={styles.home}>
-        <Button onPress={() => navigation.navigate('Charts')}>
-          <Text style={styles.btnText}>Charts/Graphs</Text>
-        </Button>
-        {/* <Button onPress={() => navigation.navigate('CalendarScreen')}>
-          <Text style={styles.btnText}>Calendar Screen</Text>
-        </Button>
-        <Button onPress={() => navigation.navigate('AgendaScreen')}>
-          <Text style={styles.btnText}>Agenda Screen</Text>
-        </Button>
-        <Button onPress={() => navigation.navigate('CalendarListScreen')}>
-          <Text style={styles.btnText}>Calendar List Screen</Text>
-        </Button>
-        <Button onPress={() => navigation.navigate('ExpandableCalendarScreen')}>
-          <Text style={styles.btnText}>Expandable Calendar Screen</Text>
-        </Button>
-        <Button onPress={() => navigation.navigate('NewCalendarListScreen')}>
-          <Text style={styles.btnText}>New Calendar List Screen</Text>
-        </Button>
-        <Button onPress={() => navigation.navigate('PlaygroundScreen')}>
-          <Text style={styles.btnText}>Playground Screen</Text>
-        </Button>
-        <Button onPress={() => navigation.navigate('TimelineCalendarScreen')}>
-          <Text style={styles.btnText}>Timeline Calendar Screen</Text>
-        </Button> */}
-        <Button onPress={() => navigation.navigate('NewCalendarScreen')}>
-          <Text style={styles.btnText}>New Calendar Screen</Text>
-        </Button>
-      </View>
+    <SafeAreaView style={{...styles.root, height: height * 0.9}}>
+      <ScrollView style={styles.scrollView}>
+        <View style={styles.home}>
+          {buttonData.map(({text, route}, index) => (
+            <Button key={index} onPress={() => navigation.navigate(route)}>
+              <Text style={styles.btnText}>{text}</Text>
+            </Button>
+          ))}
+        </View>
+      </ScrollView>
     </SafeAreaView>
   );
 };
+
+const buttonData = [
+  {route: 'LineChart', text: 'Line Chart'},
+  {route: 'BarChart', text: 'Bar Chart'},
+  {route: 'DonutChart', text: 'Donut Chart'},
+  // {route: 'CalendarScreen', text: 'Calendar Screen'},
+  // {route: 'AgendaScreen', text: 'Agenda Screen'},
+  // {route: 'CalendarListScreen', text: 'Calendar List Screen'},
+  // {route: 'ExpandableCalendarScreen', text: 'Expandable Calendar Screen'},
+  // {route: 'NewCalendarListScreen', text: 'New Calendar List Screen'},
+  // {route: 'PlaygroundScreen', text: 'Playground Screen'},
+  // {route: 'TimelineCalendarScreen', text: 'Timeline Calendar Screen'},
+  {route: 'NewCalendarScreen', text: 'Calendar'},
+];
 
 export default Home;
 
@@ -59,11 +55,16 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
-  home: {
-    top: 20,
-    padding: 40,
+  scrollView: {
     width: '100%',
+  },
+  home: {
+    padding: 30,
+    width: '100%',
+    // paddingVertical: 40,
+    // width: '100%',
     gap: 10,
+    margin: 0,
   },
   btnText: {
     fontSize: 18,
