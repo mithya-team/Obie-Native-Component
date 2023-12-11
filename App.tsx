@@ -14,6 +14,7 @@ import NewCalendarScreen from './src/Screens/Example/src/screens/calendarPlaygro
 import LineChart from './src/Screens/Charts/LineChart';
 import BarChart from './src/Screens/Charts/BarChart';
 import DonutChart from './src/Screens/Charts/DonutChart';
+import Typography from './src/Screens/Typography';
 
 const Stack = createNativeStackNavigator();
 
@@ -26,6 +27,7 @@ function App(): JSX.Element {
         <Stack.Screen name="BarChart" component={BarChart} />
         <Stack.Screen name="DonutChart" component={DonutChart} />
         <Stack.Screen name="DatePickers" component={DatePickers} />
+        <Stack.Screen name="Typography" component={Typography} />
         {/* <Stack.Screen name="CalendarScreen" component={CalendarScreen} /> */}
         {/* <Stack.Screen name="AgendaScreen" component={AgendaScreen} />
         <Stack.Screen

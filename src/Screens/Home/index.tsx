@@ -44,6 +44,7 @@ const buttonData = [
   // {route: 'PlaygroundScreen', text: 'Playground Screen'},
   // {route: 'TimelineCalendarScreen', text: 'Timeline Calendar Screen'},
   {route: 'NewCalendarScreen', text: 'Calendar'},
+  {route: 'Typography', text: 'Typography'},
 ];
 
 export default Home;
